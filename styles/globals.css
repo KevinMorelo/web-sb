@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; /* 🔥 Aplica la fuente en toda la web */
+}
+
+
+body {
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    padding-top: 60px; /* Para evitar que el Header cubra contenido */
+    background: linear-gradient(180deg, #f9f9f9, #ffffff);
+}
+
+/* Diseño del contenedor principal */
+.container {
+    flex: 1; /* Permite que el contenido crezca y empuja el footer hacia abajo */
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que ocupe al menos toda la pantalla */
+}
+
+footer {
+    width: 100%;
+    background: #1a1a1a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* ========== CABECERA (HEADER) ========== */
+/* Ajustes generales para el Header */
+header {
+    background: #2C3E50;
+    color: white;
+    padding: 15px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Diseño del Menú en pantallas grandes */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+/* Enlaces del menú */
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #f39c12;
+}
+
+/* Responsividad - Menú en pantallas pequeñas */
+@media (max-width: 768px) {
+    .menu-button {
+        display: block;
+    }
+
+    nav ul {
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #2C3E50;
+        text-align: center;
+        padding: 20px;
+        display: none;
+    }
+
+    nav ul.open {
+        display: flex;
+    }
+}
+
+/* ========== DISEÑO RESPONSIVO ========== */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 15px;
+        padding-top: 10px;
+    }
+}
+
+/* Estilos del Footer */
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Estilos para los botones */
+button {
+    background: #f39c12;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #e67e22;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+}

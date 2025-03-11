@@ -2,7 +2,12 @@
 
 import ImageSlider from "../components/ImageSlider";
 import styled, { keyframes } from "styled-components";
-import Footer from "../components/Footer";
+import { useRouter } from "next/navigation";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
+} from "react-icons/fa";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -194,7 +199,7 @@ const ServiceButton = styled.button`
   cursor: pointer;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
-  margin-top: auto; /* 🔥 Esto empuja el botón hacia abajo */
+  margin-top: auto;
 
   &:hover {
     background: #e67e22;
@@ -231,7 +236,6 @@ const ServiceTitle = styled.h3`
   justify-content: center;
   text-align: center;
 `;
-
 
 const ServiceDescription = styled.p`
   font-size: 16px;
@@ -274,49 +278,46 @@ const ServiceSlider = styled(Slider)`
 `;
 
 const arrowStyle = {
-    border: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    background: "#f39c12",
-    borderRadius: "50%",
-    width: "40px",  // Tamaño del círculo
-    height: "40px",
-    padding: "10px",
-    zIndex: "10",  // Asegura que estén sobre la imagen
-    cursor: "pointer",
-    fontSize: "20px",  // Tamaño del icono de la flecha
-    color: "#fff",  // Color de la flecha
-    position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%)",
-    boxshadow: "0 5px 15px rgba(0, 0, 0, 0.2)",
-    transition: "all 0.3s ease-in-out",
-
+  border: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  background: "#f39c12",
+  borderRadius: "50%",
+  width: "40px", // Tamaño del círculo
+  height: "40px",
+  padding: "10px",
+  zIndex: "10", // Asegura que estén sobre la imagen
+  cursor: "pointer",
+  fontSize: "20px", // Tamaño del icono de la flecha
+  color: "#fff", // Color de la flecha
+  position: "absolute",
+  top: "50%",
+  transform: "translateY(-50%)",
+  boxshadow: "0 5px 15px rgba(0, 0, 0, 0.2)",
+  transition: "all 0.3s ease-in-out",
 };
 
 const NextArrow = (props) => {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            onClick={onClick}
-            style={{ ...arrowStyle, right: "-35px" }} // Alineación derecha
-        >
-        </div>
-    );
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      onClick={onClick}
+      style={{ ...arrowStyle, right: "-35px" }} // Alineación derecha
+    ></div>
+  );
 };
 
 const PrevArrow = (props) => {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            onClick={onClick}
-            style={{ ...arrowStyle, left: "-35px" }} // Alineación izquierda
-        >
-        </div>
-    );
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      onClick={onClick}
+      style={{ ...arrowStyle, left: "-35px" }} // Alineación izquierda
+    ></div>
+  );
 };
 
 const sliderSettings = {
@@ -398,7 +399,11 @@ const InstagramButton = styled.a`
 
 // **Sección 3: Contacto**
 const ContactSection = styled(Section)`
-  background: linear-gradient(135deg, #2c3e50, #34495e); /* Gradiente atractivo */
+  background: linear-gradient(
+    135deg,
+    #2c3e50,
+    #34495e
+  ); /* Gradiente atractivo */
   color: white;
   text-align: center;
   padding: 80px 50px;
@@ -492,6 +497,105 @@ const TextArea = styled.textarea`
 `;
 
 export default function HomePage() {
+  const router = useRouter();
+
+  const handleMoreInfo = (service) => {
+    router.push(`/services/${service}`);
+  };
+
+  const ContactInfoSection = styled.section`
+    background: #f8f9fa;
+    padding: 80px 20px;
+    text-align: center;
+  `;
+
+  const ContactInfoContainer = styled.div`
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: center; /* Centrado */
+    gap: 40px;
+    flex-wrap: nowrap;
+  `;
+
+  const ContactCard = styled.div`
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 320px; /* Tamaño uniforme */
+    min-height: 300px; /* Altura mínima */
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centra el contenido */
+    border: 2px solid transparent;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      border-color: #f39c12;
+    }
+  `;
+
+  const Icon = styled.div`
+    font-size: 48px;
+    color: #f39c12;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease-in-out;
+
+    ${ContactCard}:hover & {
+      transform: scale(1.2);
+    }
+  `;
+
+  const ContactInfoTitle = styled.h3`
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  `;
+
+  const ContactText = styled.p`
+    font-size: 16px;
+    color: #555;
+    word-wrap: break-word;
+    margin: 0;
+    max-width: 260px; /* Evita textos demasiado largos */
+  `;
+
+  const SocialLinks = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+
+    a {
+      font-size: 28px;
+      color: #2c3e50;
+      transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+      &:hover {
+        color: #f39c12;
+        transform: scale(1.2) rotate(5deg);
+      }
+    }
+  `;
+
+  // 🔹 Estilos mejorados para el mapa
+  const MapContainer = styled.div`
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-top: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  `;
+
   return (
     <>
       <HeroSection>
@@ -521,57 +625,81 @@ export default function HomePage() {
             <ServiceImage src="/biomedica.jpg" alt="Servicio 1" />
             <ServiceTitle>Mantenimiento Preventivo</ServiceTitle>
             <ServiceDescription>
-            Inspección y pruebas periódicas para garantizar funcionamiento seguro y evitar fallas
+              Inspección y pruebas periódicas para garantizar funcionamiento
+              seguro y evitar fallas.
             </ServiceDescription>
-            <ServiceButton>Clic para más información</ServiceButton>
+            <ServiceButton
+              onClick={() => handleMoreInfo("mantenimiento-preventivo")}
+            >
+              Clic para más información
+            </ServiceButton>
           </ServiceCard>
           <ServiceCard>
             <ServiceImage src="/biomedica.jpg" alt="Servicio 2" />
             <ServiceTitle>Mantenimiento Correctivo</ServiceTitle>
             <ServiceDescription>
-            Reparación de equipos para corregir fallas, restablecer funcionamiento y garantizar seguridad
+              Reparación de equipos para corregir fallas, restablecer
+              funcionamiento y garantizar seguridad.
             </ServiceDescription>
-            <ServiceButton>Clic para más información</ServiceButton>
+            <ServiceButton
+              onClick={() => handleMoreInfo("mantenimiento-correctivo")}
+            >
+              Clic para más información
+            </ServiceButton>
           </ServiceCard>
           <ServiceCard>
             <ServiceImage src="/biomedica.jpg" alt="Servicio 3" />
             <ServiceTitle>Calibración</ServiceTitle>
             <ServiceDescription>
-            Comparación de medidas de equipos usando patrones, simuladores y analizadores como referencia
+              Comparación de medidas de equipos usando patrones, simuladores y
+              analizadores como referencia.
             </ServiceDescription>
-            <ServiceButton>Clic para más información</ServiceButton>
+            <ServiceButton onClick={() => handleMoreInfo("calibracion")}>
+              Clic para más información
+            </ServiceButton>
           </ServiceCard>
           <ServiceCard>
             <ServiceImage src="/biomedica.jpg" alt="Servicio 4" />
             <ServiceTitle>Asesoría BPM Aire Medicinal</ServiceTitle>
             <ServiceDescription>
-            Asesoría en BPM de aire medicinal según Resolución 4410
+              Asesoría en BPM de aire medicinal según Resolución 4410
             </ServiceDescription>
-            <ServiceButton>Clic para más información</ServiceButton>
+            <ServiceButton onClick={() => handleMoreInfo("calibracion")}>
+              Clic para más información
+            </ServiceButton>
           </ServiceCard>
           <ServiceCard>
             <ServiceImage src="/biomedica.jpg" alt="Servicio 5" />
             <ServiceTitle>Marcado Láser Instrumental</ServiceTitle>
             <ServiceDescription>
-            Marcado láser de instrumental quirúrgico para garantizar trazabilidad y mejorar gestión hospitalaria
+              Marcado láser de instrumental quirúrgico para garantizar
+              trazabilidad y mejorar gestión hospitalaria
             </ServiceDescription>
-            <ServiceButton>Clic para más información</ServiceButton>
+            <ServiceButton Click={() => handleMoreInfo("calibracion")}>
+              Clic para más información
+            </ServiceButton>
           </ServiceCard>
           <ServiceCard>
             <ServiceImage src="/biomedica.jpg" alt="Servicio 6" />
             <ServiceTitle>Validación de Cadena de Frío</ServiceTitle>
             <ServiceDescription>
-            Garantizamos la cadena de frío para evitar daños en medicamentos, sangre y proteger al paciente
+              Garantizamos la cadena de frío para evitar daños en medicamentos,
+              sangre y proteger al paciente
             </ServiceDescription>
-            <ServiceButton>Clic para más información</ServiceButton>
+            <ServiceButton onClick={() => handleMoreInfo("calibracion")}>
+              Clic para más información
+            </ServiceButton>
           </ServiceCard>
           <ServiceCard>
             <ServiceImage src="/biomedica.jpg" alt="Servicio 7" />
             <ServiceTitle>Capacitación y Entrenamiento</ServiceTitle>
             <ServiceDescription>
-            Capacitación para personal biomédico en mantenimiento, calibración e ingeniería biomédica
+              Capacitación para personal biomédico en mantenimiento, calibración
+              e ingeniería biomédica
             </ServiceDescription>
-            <ServiceButton>Clic para más información</ServiceButton>
+            <ServiceButton onClick={() => handleMoreInfo("calibracion")}>
+              Clic para más información
+            </ServiceButton>
           </ServiceCard>
         </ServiceSlider>
       </ServicesSection>
@@ -588,29 +716,76 @@ export default function HomePage() {
         Ver más en Instagram
     </InstagramButton>
 </InstagramSection> */}
-<ContactSection>
-  <ContactContainer>
-    <ContactTitle>Contáctanos</ContactTitle>
-    
-    <ContactInfo>
-      📍 Dirección: Calle 123 # 45-67, Ciudad
-    </ContactInfo>
-    <ContactInfo>
-      📞 Teléfono: +57 123 456 7890
-    </ContactInfo>
-    <ContactInfo>
-      ✉️ Email: contacto@sociedadbiomedica.com
-    </ContactInfo>
+      <ContactSection>
+        <ContactContainer>
+          <ContactTitle>Contáctanos</ContactTitle>
 
-    {/* Opcional: Formulario de Contacto */}
-    <ContactForm>
-      <Input type="text" placeholder="Tu nombre" required />
-      <Input type="email" placeholder="Tu correo electrónico" required />
-      <TextArea placeholder="Escribe tu mensaje..." required></TextArea>
-      <ContactButton type="submit">Enviar Mensaje</ContactButton>
-    </ContactForm>
-  </ContactContainer>
-</ContactSection>
-</>
-);
+          <ContactInfo>📍 Dirección: Calle 123 # 45-67, Ciudad</ContactInfo>
+          <ContactInfo>📞 Teléfono: +57 123 456 7890</ContactInfo>
+          <ContactInfo>✉️ Email: contacto@sociedadbiomedica.com</ContactInfo>
+
+          {/* Opcional: Formulario de Contacto */}
+          <ContactForm>
+            <Input type="text" placeholder="Tu nombre" required />
+            <Input type="email" placeholder="Tu correo electrónico" required />
+            <TextArea placeholder="Escribe tu mensaje..." required></TextArea>
+            <ContactButton type="submit">Enviar Mensaje</ContactButton>
+          </ContactForm>
+        </ContactContainer>
+      </ContactSection>
+      <ContactInfoSection>
+        <ContactInfoContainer>
+          {/* 🔹 Correo Electrónico */}
+          <ContactCard>
+            <Icon>📧</Icon>
+            <ContactInfoTitle>Correo Electrónico</ContactInfoTitle>
+            <ContactText>info@sociedadbiomedica.co</ContactText>
+          </ContactCard>
+
+          {/* 🔹 Ubicación con Google Maps */}
+          <ContactCard>
+            <Icon>📍</Icon>
+            <ContactInfoTitle>Ubicación</ContactInfoTitle>
+            <MapContainer>
+              <iframe
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                style={{ border: 0, borderRadius: "12px" }}
+                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDFCUeUrFICCF8VM37gLoB3a7RxAoDYv8w&q=8.757282474117977,-75.87531756942022`}
+                allowFullScreen
+              ></iframe>
+            </MapContainer>
+          </ContactCard>
+          <ContactCard>
+            <Icon>🌐</Icon>
+            <ContactInfoTitle>Redes Sociales</ContactInfoTitle>
+            <SocialLinks>
+              <a
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaFacebook />
+              </a>
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaInstagram />
+              </a>
+              <a
+                href="https://www.linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaLinkedin />
+              </a>
+            </SocialLinks>
+          </ContactCard>
+        </ContactInfoContainer>
+      </ContactInfoSection>
+    </>
+  );
 }

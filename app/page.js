@@ -1,4 +1,4 @@
-"use client"; // Asegura que se ejecute solo en el cliente
+"use client";
 
 import {
   FaPhone,

@@ -6,35 +6,29 @@ import "slick-carousel/slick/slick-theme.css";
 
 
 const ImageContainer = styled.div`
-    flex: 1;
-    width: 50%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 10px; /* 🟡 Bordes redondeados */
-    }
+  img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
 
-    @media (max-width: 768px) {
-    display: none;
+    &:hover {
+      transform: scale(1.05);
     }
+  }
 
-    &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.2); /* 🔥 Añadir opacidad sutil */
-    }
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 20px;
+  }
 `;
 
 const Overlay = styled.div`

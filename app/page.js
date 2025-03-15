@@ -1,13 +1,18 @@
 "use client"; // Asegura que se ejecute solo en el cliente
 
-import ImageSlider from "../components/ImageSlider";
-import styled, { keyframes } from "styled-components";
-import { useRouter } from "next/navigation";
 import {
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
   FaFacebook,
   FaInstagram,
   FaLinkedin,
+  FaStar,
+  FaStarHalfAlt,
 } from "react-icons/fa";
+import ImageSlider from "../components/ImageSlider";
+import styled, { keyframes } from "styled-components";
+import { useRouter } from "next/navigation";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -61,7 +66,7 @@ const Button = styled.button`
   cursor: pointer;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
-  margin-top: 15px;
+  margin-top: 40px;
 
   &:hover {
     background: #e67e22;
@@ -80,17 +85,17 @@ const HeroSection = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 85vh; /* En lugar de 100vh, reducimos el alto */
+  height: 85vh; /* Mantiene una buena altura */
   width: 100%;
   max-width: 1200px;
   margin: auto;
-  padding: 0;
+  padding: 0 20px;
   overflow: hidden;
 
   @media (max-width: 768px) {
     flex-direction: column;
-    height: auto; /* Para que en móviles se adapte */
-    padding-top: 80px; /* Evita que el header lo cubra */
+    height: auto;
+    padding-top: 60px;
     text-align: center;
     justify-content: center;
   }
@@ -99,7 +104,7 @@ const HeroSection = styled.section`
 const fadeInUp = keyframes`
   from {
     opacity: 0;
-    transform: translateY(30px); /* ✅ Sin espacios incorrectos */
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -108,41 +113,54 @@ const fadeInUp = keyframes`
 `;
 
 const TextContainer = styled.div`
-  flex: 1; /* 📌 Ocupará la mitad derecha */
-  padding: 20px 40px; /* 📌 Reduce el padding superior */
+  flex: 1;
+  padding: 20px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: -30px; /* 📌 Hace que suba más cerca del header */
-  animation: ${fadeInUp} 0.6s ease-in-out; /* ✅ Aplica la animación correctamente */
+  animation: ${fadeInUp} 0.6s ease-in-out;
 
   @media (max-width: 768px) {
     padding: 20px;
     width: 100%;
     text-align: center;
-    margin-top: -20px; /* Ajuste en móviles */
   }
 `;
 
 const ImageContainer = styled.div`
-  flex: 1; /* 📌 Ocupará la mitad izquierda */
-  width: 50%; /* 📌 Se asegura de ocupar solo la mitad */
-  height: 100vh; /* ✅ Asegura que tenga altura */
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  position: relative; /* ✅ Asegura que Image funcione bien */
 
   img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 500px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   @media (max-width: 768px) {
     width: 100%;
-    height: 50vh; /* 📌 Para evitar que cubra demasiado en móviles */
+    margin-top: 20px;
+  }
+`;
+
+const HeroButton = styled(Button)`
+  background: #e74c3c;
+  padding: 15px 20px;
+  font-size: 18px;
+  margin-top: 20px;
+
+  &:hover {
+    background: #c0392b;
   }
 `;
 
@@ -346,156 +364,7 @@ const sliderSettings = {
   ],
 };
 
-// 📌 Sección de Instagram
-
-const InstagramSection = styled(Section)`
-  background: #fafafa;
-  text-align: center;
-  padding: 60px 20px;
-`;
-
-const InstagramGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
-  max-width: 1000px;
-  margin: auto;
-  margin-top: 30px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
-const InstagramImage = styled.img`
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-  transition: transform 0.3s ease-in-out;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-`;
-
-const InstagramButton = styled.a`
-  display: inline-block;
-  background: #e4405f;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 12px 18px;
-  border-radius: 8px;
-  margin-top: 20px;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-
-  &:hover {
-    background: #d62e50;
-    transform: scale(1.05);
-  }
-`;
-
 // **Sección 3: Contacto**
-const ContactSection = styled(Section)`
-  background: linear-gradient(
-    135deg,
-    #2c3e50,
-    #34495e
-  ); /* Gradiente atractivo */
-  color: white;
-  text-align: center;
-  padding: 80px 50px;
-  border-radius: 15px;
-  margin-top: 40px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
-`;
-
-const ContactContainer = styled.div`
-  background: rgba(255, 255, 255, 0.1);
-  padding: 30px;
-  border-radius: 12px;
-  display: inline-block;
-  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
-  width: 70%;
-  margin: auto;
-`;
-
-const ContactTitle = styled.h2`
-  font-size: 42px;
-  font-weight: 800;
-  margin-bottom: 15px;
-  color: #f39c12;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-`;
-
-const ContactInfo = styled.p`
-  font-size: 18px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-
-  svg {
-    font-size: 22px;
-    color: #f39c12;
-  }
-`;
-
-const ContactButton = styled(Button)`
-  font-size: 18px;
-  padding: 15px 25px;
-  transition: all 0.3s ease-in-out;
-
-  &:hover {
-    background: #e67e22;
-    transform: scale(1.1);
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
-  }
-`;
-
-const ContactForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  margin-top: 20px;
-`;
-
-const Input = styled.input`
-  width: 80%;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  color: #333;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-
-  &:focus {
-    outline: none;
-    box-shadow: 0px 4px 15px rgba(243, 156, 18, 0.6);
-  }
-`;
-
-const TextArea = styled.textarea`
-  width: 80%;
-  height: 120px;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  color: #333;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  resize: none;
-
-  &:focus {
-    outline: none;
-    box-shadow: 0px 4px 15px rgba(243, 156, 18, 0.6);
-  }
-`;
-
 export default function HomePage() {
   const router = useRouter();
 
@@ -503,76 +372,66 @@ export default function HomePage() {
     router.push(`/services/${service}`);
   };
 
-  const ContactInfoSection = styled.section`
-    background: #f8f9fa;
-    padding: 80px 20px;
+  const ContactSection = styled.section`
+    background: #f4f4f4;
     text-align: center;
-  `;
-
-  const ContactInfoContainer = styled.div`
-    max-width: 1200px;
-    margin: auto;
-    display: flex;
-    justify-content: center; /* Centrado */
-    gap: 40px;
-    flex-wrap: nowrap;
-  `;
-
-  const ContactCard = styled.div`
-    background: white;
-    padding: 30px;
+    padding: 80px 50px;
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    width: 320px; /* Tamaño uniforme */
-    min-height: 300px; /* Altura mínima */
-    text-align: center;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-top: 40px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  `;
+
+  const ContactContainer = styled.div`
+    background: white;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 700px;
+    margin: auto;
+  `;
+
+  const ContactTitle = styled.h2`
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #f39c12;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  `;
+
+  const ContactInfo = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centra el contenido */
-    border: 2px solid transparent;
-
-    &:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-      border-color: #f39c12;
-    }
+    gap: 15px;
+    margin-bottom: 30px;
+    font-size: 18px;
   `;
 
-  const Icon = styled.div`
-    font-size: 48px;
-    color: #f39c12;
-    margin-bottom: 15px;
-    transition: transform 0.3s ease-in-out;
-
-    ${ContactCard}:hover & {
-      transform: scale(1.2);
-    }
-  `;
-
-  const ContactInfoTitle = styled.h3`
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
+  const ContactItem = styled.p`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
     color: #2c3e50;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  `;
 
-  const ContactText = styled.p`
-    font-size: 16px;
-    color: #555;
-    word-wrap: break-word;
-    margin: 0;
-    max-width: 260px; /* Evita textos demasiado largos */
+    svg {
+      font-size: 22px;
+      color: #f39c12;
+    }
   `;
 
   const SocialLinks = styled.div`
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-top: 15px;
+    gap: 20px;
+    margin-top: 25px;
 
     a {
       font-size: 28px;
@@ -581,42 +440,238 @@ export default function HomePage() {
 
       &:hover {
         color: #f39c12;
-        transform: scale(1.2) rotate(5deg);
+        transform: scale(1.2);
       }
     }
   `;
 
-  // 🔹 Estilos mejorados para el mapa
+  const ContactForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+  `;
+
+  const Input = styled.input`
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease-in-out;
+
+    &:focus {
+      outline: none;
+      border-color: #f39c12;
+      box-shadow: 0px 4px 15px rgba(243, 156, 18, 0.3);
+    }
+  `;
+
+  const TextArea = styled.textarea`
+    width: 100%;
+    height: 120px;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+    resize: none;
+    transition: all 0.3s ease-in-out;
+
+    &:focus {
+      outline: none;
+      border-color: #f39c12;
+      box-shadow: 0px 4px 15px rgba(243, 156, 18, 0.3);
+    }
+  `;
+
+  const ContactButton = styled.button`
+    background: #f39c12;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background: #e67e22;
+      transform: scale(1.05);
+      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+    }
+  `;
+
   const MapContainer = styled.div`
     width: 100%;
-    height: 180px;
-    overflow: hidden;
+    height: 300px;
     border-radius: 12px;
-    margin-top: 10px;
+    margin-top: 30px;
+    overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
   `;
+
+  // **Sección de Testimonios Mejorada**
+  const TestimonialsSection = styled.section`
+    background: #ffffff;
+    text-align: center;
+    padding: 60px 20px;
+    margin-top: 40px;
+  `;
+
+  const TestimonialCard = styled.div`
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 450px;
+    min-height: 280px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+  `;
+
+  const TestimonialImage = styled.img`
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 10px auto; /* Ajustado para centrar correctamente */
+    display: block;
+  `;
+
+  const Stars = styled.div`
+    color: #f39c12;
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+  `;
+
+  const TestimonialText = styled.p`
+    font-size: 16px;
+    color: #555;
+    line-height: 1.4;
+    font-style: italic;
+    margin-bottom: 15px;
+  `;
+
+  const TestimonialAuthor = styled.strong`
+    font-size: 18px;
+    color: #333;
+    display: block;
+    margin-top: 5px;
+  `;
+
+  const TestimonialCompany = styled.small`
+    font-size: 14px;
+    color: #888;
+    display: block;
+  `;
+
+  const TestimonialSlider = styled(Slider)`
+    .slick-slide {
+      display: flex;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    .slick-prev,
+    .slick-next {
+      font-size: 24px;
+      color: #f39c12;
+      z-index: 1;
+    }
+
+    .slick-prev {
+      left: -40px;
+    }
+
+    .slick-next {
+      right: -40px;
+    }
+
+    .slick-dots li.slick-active button:before {
+      color: #f39c12;
+    }
+  `;
+
+  const testimonialData = [
+    {
+      name: "Dr. Juan Pérez",
+      company: "Clínica ABC",
+      feedback: "La calibración mejoró la seguridad en nuestro hospital.",
+      image: "/client1.jpg",
+      rating: 5,
+    },
+    {
+      name: "Ing. Carolina Gómez",
+      company: "Hospital XYZ",
+      feedback:
+        "El servicio de mantenimiento preventivo prolongó la vida útil de nuestros equipos.",
+      image: "/client2.jpg",
+      rating: 4,
+    },
+    {
+      name: "Dr. Luis Ramírez",
+      company: "Centro Médico 123",
+      feedback:
+        "Gracias a la asesoría, cumplimos con las normativas sin problemas.",
+      image: "/client3.jpg",
+      rating: 5,
+    },
+  ];
+
+  const renderStars = (rating) => {
+    let stars = [];
+    for (let i = 0; i < 5; i++) {
+      stars.push(i < rating ? <FaStar key={i} /> : <FaStarHalfAlt key={i} />);
+    }
+    return <Stars>{stars}</Stars>;
+  };
 
   return (
     <>
       <HeroSection>
-        <ImageContainer>
-          <ImageSlider />
-        </ImageContainer>
         <TextContainer>
           <Title>Bienvenido a Sociedad Biomédica</Title>
           <p>
-            ¡Bienvenido a Sociedad Biomédica! Somos una empresa colombiana
-            especializada en la gestión de tecnología biomédica, con la misión
-            de ayudarte a salvar vidas en todo el mundo.
+            Somos una empresa colombiana especializada en la gestión de
+            tecnología biomédica. Nuestra misión es garantizar la seguridad del
+            paciente a través de la innovación y el conocimiento.
           </p>
           <p>
-            Además, si buscas aprender y crecer en el campo de la ingeniería
-            biomédica, te ofrecemos capacitación y formación de alto nivel para
-            toda Latinoamérica. ¡Estamos aquí para apoyarte en lo que necesites!
-            🚀
+            Si necesitas asesoría en mantenimiento, calibración o gestión
+            biomédica, ¡contáctanos hoy mismo! 🚀
           </p>
-          <Button>Mas de Nosotros</Button>
+          <HeroButton onClick={() => router.push("/contact")}>
+            Solicita una asesoría gratuita
+          </HeroButton>
         </TextContainer>
+        <ImageContainer>
+        <ImageSlider />
+        </ImageContainer>
       </HeroSection>
       <ServicesSection>
         <Title>Nuestros Servicios</Title>
@@ -703,89 +758,84 @@ export default function HomePage() {
           </ServiceCard>
         </ServiceSlider>
       </ServicesSection>
-
-      {/* <InstagramSection>
-<Title>Síguenos en Instagram</Title>
-    <InstagramGrid>
-        <InstagramImage src="/insta1.jpg" alt="Post 1" />
-        <InstagramImage src="/insta2.jpg" alt="Post 2" />
-        <InstagramImage src="/insta3.jpg" alt="Post 3" />
-        <InstagramImage src="/insta4.jpg" alt="Post 4" />
-    </InstagramGrid>
-    <InstagramButton href="https://instagram.com/sociedadbiomedica" target="_blank">
-        Ver más en Instagram
-    </InstagramButton>
-</InstagramSection> */}
+      <TestimonialsSection>
+        <Title>Casos de Éxito</Title>
+        <p>
+          Nuestros clientes nos califican con un promedio de 4.9/5 ⭐⭐⭐⭐⭐
+        </p>
+        <TestimonialSlider {...sliderSettings}>
+          {testimonialData.map((testimonial, index) => (
+            <TestimonialCard key={index}>
+              <TestimonialImage
+                src={testimonial.image}
+                alt={testimonial.name}
+              />
+              {renderStars(testimonial.rating)}
+              <TestimonialText>{testimonial.feedback}</TestimonialText>
+              <TestimonialAuthor>{testimonial.name}</TestimonialAuthor>
+              <TestimonialCompany>{testimonial.company}</TestimonialCompany>
+            </TestimonialCard>
+          ))}
+        </TestimonialSlider>
+        <Button onClick={() => router.push("/testimonios")}>
+          Ver más testimonios
+        </Button>
+      </TestimonialsSection>
       <ContactSection>
         <ContactContainer>
           <ContactTitle>Contáctanos</ContactTitle>
 
-          <ContactInfo>📍 Dirección: Calle 123 # 45-67, Ciudad</ContactInfo>
-          <ContactInfo>📞 Teléfono: +57 123 456 7890</ContactInfo>
-          <ContactInfo>✉️ Email: contacto@sociedadbiomedica.com</ContactInfo>
+          <ContactInfo>
+            <ContactItem>
+              <FaMapMarkerAlt /> Calle 123 # 45-67, Ciudad
+            </ContactItem>
+            <ContactItem>
+              <FaPhone /> +57 123 456 7890
+            </ContactItem>
+            <ContactItem>
+              <FaEnvelope /> contacto@sociedadbiomedica.com
+            </ContactItem>
+          </ContactInfo>
 
-          {/* Opcional: Formulario de Contacto */}
+          <SocialLinks>
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFacebook />
+            </a>
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaInstagram />
+            </a>
+            <a
+              href="https://www.linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaLinkedin />
+            </a>
+          </SocialLinks>
+
           <ContactForm>
             <Input type="text" placeholder="Tu nombre" required />
             <Input type="email" placeholder="Tu correo electrónico" required />
-            <TextArea placeholder="Escribe tu mensaje..." required></TextArea>
+            <TextArea placeholder="Escribe tu mensaje..." required />
             <ContactButton type="submit">Enviar Mensaje</ContactButton>
           </ContactForm>
+
+          <MapContainer>
+            <iframe
+              src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDFCUeUrFICCF8VM37gLoB3a7RxAoDYv8w&q=8.757282474117977,-75.87531756942022`}
+              allowFullScreen
+            ></iframe>
+          </MapContainer>
         </ContactContainer>
       </ContactSection>
-      <ContactInfoSection>
-        <ContactInfoContainer>
-          {/* 🔹 Correo Electrónico */}
-          <ContactCard>
-            <Icon>📧</Icon>
-            <ContactInfoTitle>Correo Electrónico</ContactInfoTitle>
-            <ContactText>info@sociedadbiomedica.co</ContactText>
-          </ContactCard>
-
-          {/* 🔹 Ubicación con Google Maps */}
-          <ContactCard>
-            <Icon>📍</Icon>
-            <ContactInfoTitle>Ubicación</ContactInfoTitle>
-            <MapContainer>
-              <iframe
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                style={{ border: 0, borderRadius: "12px" }}
-                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDFCUeUrFICCF8VM37gLoB3a7RxAoDYv8w&q=8.757282474117977,-75.87531756942022`}
-                allowFullScreen
-              ></iframe>
-            </MapContainer>
-          </ContactCard>
-          <ContactCard>
-            <Icon>🌐</Icon>
-            <ContactInfoTitle>Redes Sociales</ContactInfoTitle>
-            <SocialLinks>
-              <a
-                href="https://www.facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaFacebook />
-              </a>
-              <a
-                href="https://www.instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaInstagram />
-              </a>
-              <a
-                href="https://www.linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaLinkedin />
-              </a>
-            </SocialLinks>
-          </ContactCard>
-        </ContactInfoContainer>
-      </ContactInfoSection>
     </>
   );
 }

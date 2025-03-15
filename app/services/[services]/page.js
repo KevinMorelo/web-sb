@@ -43,13 +43,13 @@ const serviceData = {
 export default function ServiceDetail() {
   const params = useParams();
   
-  console.log("Ruta capturada:", params); // 🔍 Verificar qué devuelve
+  console.log("Ruta capturada:", params);
 
   if (!params || !params.services) {
     return <ServiceContainer>Servicio no encontrado</ServiceContainer>;
   }
 
-  const service = params.services; // 🔥 Ajustamos a `services`
+  const service = params.services;
 
   if (!serviceData[service]) {
     return <ServiceContainer>Servicio no encontrado</ServiceContainer>;
